@@ -23,6 +23,12 @@ import type { TokenSource } from "./token.js";
 import { TokenTable } from "./tokens.js";
 import type { Address, Category, Plan, RiskLabel, Verb } from "./types.js";
 
+/** Second argument to every capability/query method: the caller's identity. */
+export interface ActionCtx {
+  /** The account `action` was called for — the sender of every plan tx. */
+  account: Address;
+}
+
 /** A discover result: where a capability/query lives and how to filter it. */
 export interface Coordinate {
   protocol: string;
@@ -252,8 +258,11 @@ export class Registry {
     });
 
     const instance = this.#instantiate(protocol);
+    // Methods needing the caller inside calldata (ERC-721 transferFrom) read
+    // it from the second argument; everyone else just ignores it.
+    const ctx: ActionCtx = { account };
     // biome-ignore lint/suspicious/noExplicitAny: dynamic dispatch to the decorated method
-    const result = await (instance as any)[method](decoded);
+    const result = await (instance as any)[method](decoded, ctx);
 
     if (meta.kind === "query") {
       return { kind: "query", protocol, method, data: jsonSafe(result) };

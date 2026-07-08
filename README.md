@@ -39,6 +39,7 @@ Alpha. Monad mainnet (chain id 143). Moss builds and simulates transactions; it 
 | --- | --- | --- | --- |
 | WMON (canonical wrapped MON) | `@mossxyz/system` | `wrap`, `unwrap` | `balanceOf` |
 | erc20 (generic — any token, native MON included) | `@mossxyz/erc` | `transfer` | `balanceOf`, `allowance` |
+| erc721 (generic — any NFT collection) | `@mossxyz/erc` | `transfer` | `ownerOf`, `balanceOf` |
 | [Kuru](https://kuru.io) (on-chain CLOB DEX) | `@mossxyz/protocol-kuru` | `swap` (market orders, MON/USDC & MON/AUSD) | `quote`, `markets` |
 
 One protocol = one package. Registries assemble explicitly from package manifests — nothing registers itself by import; the MCP server lists its served catalog in one array in `server.ts` ([ADR 0006](./docs/adr/0006-protocol-packages-and-manifests.md)).
@@ -111,7 +112,7 @@ Machinery at the bottom, standards above it, instances above that, the product s
 | --- | --- | --- |
 | `@mossxyz/core` | Pure machinery — zero chain data, zero ABIs. Only dependency: viem | — |
 | `@mossxyz/simulator` | The verification engine: `debug_traceCall` simulation, effects extraction, expects reconciliation | core |
-| `@mossxyz/erc` | The interface layer: compiled standard ABIs (`ERC20Abi`, `WETH9Abi`), address-free generic behavior (`erc20` protocol, `approveStep`) — [ADR 0009](./docs/adr/0009-erc-interface-layer-and-composition.md) | core |
+| `@mossxyz/erc` | The interface layer: compiled standard ABIs (`ERC20Abi`, `ERC721Abi`, `WETH9Abi`), address-free generic behavior (`erc20`/`erc721` protocols, `approveStep`) — [ADR 0009](./docs/adr/0009-erc-interface-layer-and-composition.md) | core |
 | `@mossxyz/system` | Monad instances: token data, chain defaults (`monadRuntime`), address-bearing system adapters (WMON) | core, erc |
 | `@mossxyz/protocol-*` | One package per protocol (`packages/protocols/*`; start from `_template`) | core (+ erc/system as needed) |
 | `@mossxyz/mcp-server` | The four MCP tools over stdio, batteries included — assembles the served catalog itself | all of the above |

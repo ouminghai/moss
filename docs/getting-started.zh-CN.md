@@ -86,8 +86,9 @@ console.log(registry.discover({ verb: "swap" }));
 - **tags** —— 自由格式的长尾语义（`clob` 告诉你这家 DEX 是订单簿，
   不是 AMM）。
 
-试试 `discover({ verb: "transfer" })`——它由通用 `erc20` 协议提供，对
-*任意* token 都有效。再试试 `discover({})`，看看完整目录。
+试试 `discover({ verb: "transfer" })`——有两个提供者：通用 `erc20` 协议
+（任意代币）和通用 `erc721` 协议（任意 NFT collection）。再试试
+`discover({})`，看看完整目录。
 
 **深入阅读：** [mcp-tools.md](./mcp-tools.md#discover) · verb/category 的设计：
 [ADR 0003](./adr/0003-two-tier-capability-taxonomy.md)
@@ -243,7 +244,7 @@ vendored ABI、观察面）。
 | --- | --- | --- |
 | 机器 | `@mossxyz/core` | 装饰器、Plan、Registry —— 零链数据 |
 | 验证 | `@mossxyz/simulator` | trace 模拟 + effects 对账 |
-| 接口 | `@mossxyz/erc` | 编译的标准 ABI + 通用 erc20 协议 |
+| 接口 | `@mossxyz/erc` | 编译的标准 ABI + 无地址通用适配器（erc20、erc721） |
 | 实例 | `@mossxyz/system` | Monad token 表、链默认值、WMON |
 | 协议 | `@mossxyz/protocol-*` | 一个协议一个包 |
 | 产品 | `@mossxyz/mcp-server` | 四个工具，开箱即用 |

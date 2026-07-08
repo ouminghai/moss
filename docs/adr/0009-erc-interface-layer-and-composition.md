@@ -8,11 +8,13 @@ not. It is the **interface layer**: everything in it is a standard *interface*
    `IWETH9.sol` via forge + wagmi, ADR 0007). Pure data describing the
    interface; the currency that `contracts:` declarations and `createHandle`
    consume.
-2. **Address-free generic adapters** — the `ERC20` protocol class
-   (`contracts: {}`): capabilities whose contract address is *naturally a
-   call-time parameter* (`token` accepts a well-known symbol, an explicit 0x
-   address, or `native`; unknown addresses resolve metadata via
-   `RegistryOptions.tokenFallback`).
+2. **Address-free generic adapters** — the `ERC20` and `ERC721` protocol
+   classes (`contracts: {}`): capabilities whose contract address is
+   *naturally a call-time parameter* (erc20's `token` accepts a well-known
+   symbol, an explicit 0x address, or `native`, with unknown addresses
+   resolving metadata via `RegistryOptions.tokenFallback`; erc721's
+   `collection` is an explicit address — NFT collections are not table
+   material, the catalog is fungible-only).
 
 Where an address goes decides the layer: call-time parameter → generic
 adapter in erc; canonical instance data → system or a protocol package.

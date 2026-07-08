@@ -79,6 +79,24 @@ export const token: SemanticType<TokenRef> = {
   },
 };
 
+/** A non-negative integer (e.g. an NFT token id), as a decimal string or number. */
+export const uint: SemanticType<bigint> = {
+  describe: 'A non-negative integer (e.g. an NFT token id), as a decimal string like "42".',
+  decode(value) {
+    if (typeof value !== "string" && typeof value !== "number") {
+      throw new Error(`expected an integer, got ${typeof value}`);
+    }
+    let n: bigint;
+    try {
+      n = BigInt(value);
+    } catch {
+      throw new Error(`expected an integer, got "${value}"`);
+    }
+    if (n < 0n) throw new Error("must be non-negative");
+    return n;
+  },
+};
+
 /**
  * A human-readable amount of the token named by the sibling parameter
  * `assetParam`. Agents pass "1.5", not pre-scaled base units — the runtime

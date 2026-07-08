@@ -25,6 +25,7 @@ import {
   tokenAmount,
 } from "@mossxyz/core";
 import { ierc20Abi } from "./abis/erc.js";
+import { ERC721 } from "./erc721.js";
 
 @Protocol({
   name: "erc20",
@@ -105,6 +106,6 @@ export class ERC20 {
 /** The ERC standards package: introduces no tokens of its own. */
 export const ercManifest = defineProtocolPackage({
   name: "erc",
-  protocols: [ERC20],
+  protocols: [ERC20, ERC721],
   tokens: [],
 });

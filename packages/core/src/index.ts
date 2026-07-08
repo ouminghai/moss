@@ -29,6 +29,7 @@ export {
   stableStringify,
 } from "./plan.js";
 export {
+  type ActionCtx,
   type Coordinate,
   type QueryResult,
   Registry,
@@ -49,6 +50,7 @@ export {
   slippageBps,
   token,
   tokenAmount,
+  uint,
 } from "./semantics.js";
 export { Token, type TokenSource } from "./token.js";
 export { type KnownToken, TokenTable } from "./tokens.js";

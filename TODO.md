@@ -84,6 +84,12 @@
 - [x] **protocols-all 聚合包删除**：mcp-server 直接依赖各协议包并在 server.ts 一个数组里组装目录；examples 同构；上架协议 = 一行依赖 + 一行数组
 - [x] 词汇表新增 Step builder / Plan 补"终端产物"；CLAUDE.md 分层线与组合规则同步
 
+## erc721 接入（7月8日，应用户提案）✅
+- [x] **IERC721.sol 编译入 erc**（forge + wagmi，`ERC721Abi`）；通用 `erc721` 协议：transfer（safeTransferFrom + expects.nfts）+ ownerOf/balanceOf Query —— `nft` category 首个填充者，transfer verb 覆盖 NFT
+- [x] **core 新增 `ActionCtx`**：capability/query 方法第二参数注入 `{account}`（ERC-721 需要 caller 进 calldata 的通用机制）；语义类型词汇表新增 `uint`（tokenId）
+- [x] **e2e 设计**：以链上真实持有人作为 account 模拟转账（零私钥依旧成立）；测试数据 = Uniswap v4 Positions NFT（双重验证：Uniswap 官方 deployments 记录 chain 143 + 链上 ERC-165/name/symbol 核对），主网零警告通过，effects.nftsOut 精确对账
+- [x] 附带收获：calldata 路径让 viem 的 EIP-55 校验和检查生效——错误校验和的 account 现在大声失败
+
 ## 双面制遗留（下轮优先）
 - [ ] **余额差审计层**：候选 token 的前后态 balanceOf（override eth_call），资产流完备性与事件词汇解耦；WETH9 特判退役（ADR 0008 已记录设计）
 - [x] onboarding「声明事件」章节（§4）+ _template 真实 @Event（Deposited 事件 + confirms，CI 保真）+ mcp-tools 补 observations/CONFIRMATION_MISSING/confirms 字段 + agent-skill 补「叙事 vs 法律」规则（7月8日）
