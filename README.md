@@ -80,7 +80,7 @@ system one layer at a time — run first, then open each stage up.
 }
 ```
 
-The agent gets four tools: `discover`, `load`, `action`, `simulate`. Tool descriptions encode the safety rules; the full agent-facing contract is in [docs/agent-skill.md](./docs/agent-skill.md).
+The agent gets four tools: `discover`, `load`, `action`, `simulate` — full tool contracts in [docs/mcp-tools.md](./docs/mcp-tools.md). Tool descriptions encode the safety rules; the full agent-facing contract is in [docs/agent-skill.md](./docs/agent-skill.md).
 
 > The default endpoint `https://rpc.monad.xyz` supports the `debug_traceCall` simulation Moss needs. Roughly half of third-party free tiers do not — if simulation fails loudly, switch endpoints (see [ADR 0002](./docs/adr/0002-simulation-via-debug-tracecall.md)).
 
@@ -116,6 +116,17 @@ Machinery at the bottom, standards above it, instances above that, the product s
 | `@mossxyz/system` | Monad instances: token data, chain defaults (`monadRuntime`), address-bearing system adapters (WMON) | core, erc |
 | `@mossxyz/protocol-*` | One package per protocol (`packages/protocols/*`; start from `_template`) | core (+ erc/system as needed) |
 | `@mossxyz/mcp-server` | The four MCP tools over stdio, batteries included — assembles the served catalog itself | all of the above |
+
+## Documentation
+
+| Guide | What it covers |
+| --- | --- |
+| [Getting started](./docs/getting-started.md) ([中文](./docs/getting-started.zh-CN.md)) | The whole system, one layer at a time — run first, then open each stage up |
+| [MCP tools reference](./docs/mcp-tools.md) | The `discover` / `load` / `action` / `simulate` contracts, Plan anatomy, warning codes |
+| [Protocol onboarding](./docs/protocol-onboarding.md) | Writing and submitting an adapter, ABIs to receipts |
+| [Agent skill guide](./docs/agent-skill.md) | The rules an agent must follow: mandatory simulation, halt on warnings, intent alignment |
+| [ADRs](./docs/adr/) | Every design decision with its trade-offs |
+| [Glossary](./CONTEXT.md) | The project's ubiquitous language |
 
 ## Contributing
 

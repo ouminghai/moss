@@ -49,7 +49,18 @@ pnpm --filter @mossxyz/example-simple-flow wrap
 pnpm --filter @mossxyz/example-simple-flow swap
 ```
 
-新手建议从[新手上路指南](./docs/getting-started.zh-CN.md)开始：先整体跑一遍，再逐层拆开 discover / load / action / simulate / observations，最后引导你写自己的适配器。MCP 接入、库用法、协议接入指南见英文 [README](./README.md) 与 [docs/](./docs/README.md)。
+新手建议从[新手上路指南](./docs/getting-started.zh-CN.md)开始：先整体跑一遍，再逐层拆开 discover / load / action / simulate / observations，最后引导你写自己的适配器。MCP 接入与库用法的完整示例见英文 [README](./README.md)。
+
+## 文档导航
+
+| 文档 | 内容 |
+| --- | --- |
+| [新手上路指南](./docs/getting-started.zh-CN.md)（[English](./docs/getting-started.md)） | 逐层拆解整个系统：先跑通，再打开每个阶段 |
+| [MCP 工具参考](./docs/mcp-tools.md)（英文） | 四个工具的契约、Plan 结构、warning 码表 |
+| [协议接入指南](./docs/protocol-onboarding.md)（英文） | 从 ABI 到回执，编写并提交一个适配器 |
+| [Agent 使用守则](./docs/agent-skill.md)（英文） | Agent 必须遵守的规则：强制模拟、见警告即停、意图对齐 |
+| [设计决策记录 ADR](./docs/adr/)（英文） | 每个架构决定及其取舍 |
+| [词汇表](./CONTEXT.md)（英文） | 项目统一语言 |
 
 ## 参与贡献
 
